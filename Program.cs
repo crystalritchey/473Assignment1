@@ -71,13 +71,12 @@ namespace Assignment1
             if (alpha == null)
             { throw new ArgumentNullException(); }// Always... check for null values
 
-            Person rightOperand = alpha as Person; // Oo, typecasting using English! I like it
+            Person rightOperand = alpha as Person; //Typecasting
 
             if (rightOperand != null) // Protect against a failed typecasting
-            { return id.CompareTo(rightOperand.id); }
-            // Making use of what's already available!
+            { return FullName.CompareTo(rightOperand.FullName); }
             else
-            { throw new ArgumentException("[Student]:CompareTo argument is not a Student"); }
+            { throw new ArgumentException("[Person]:CompareTo argument is not a Person"); }
         }
 
 
@@ -89,7 +88,8 @@ namespace Assignment1
     }
 
         static void Main(string[] args)
-        { Person me = new Person();
+        { 
+            Person me = new Person();
             Console.WriteLine(me.ToString());
 
             DateTime yourBirthday = new DateTime();
