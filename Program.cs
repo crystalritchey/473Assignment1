@@ -219,10 +219,10 @@ public class Property : IComparable
         private string unit; 
     }
 
-    public class Community : IComparable, IEnumerable<Person>
+   public class Community : IComparable, IEnumerable<Person>
     {
-        private SortedSet<Property> props;
-        private SortedSet<Person> residents;
+        private SortedSet<Property> props = new SortedSet<Property>();
+        private SortedSet<Person> residents = new SortedSet<Person>();
         private readonly uint id;
         private readonly string name;
         private uint mayorID;
@@ -259,27 +259,14 @@ public class Property : IComparable
             { throw new ArgumentException("[Community]:CompareTo argument is not a Community"); }
 
         }
+
+        IEnumerator<Person> IEnumerable<Person>.GetEnumerator()
+        { return residents.GetEnumerator(); }
+
+        public IEnumerator<Person> GetEnumerator()
+        { return residents.GetEnumerator(); }
       
-        public CommEnum GetEnumerator()
-        { return new CommEnum(residents); }
+        IEnumerator IEnumerable.GetEnumerator() { return this.GetEnumerator(); }
     }
-
-    public class CommEnum : IEnumerator<Person>
-    {
-        public SortedSet<Person> sortedSetOfPeople;
-
-        int enumPosition;
-
-        public CommEnum(SortedSet<Person> setOfPeople)
-        {
-            sortedSetOfPeople = setOfPeople;
-        }
-
-        public bool MoveNext()
-        {
-            enumPosition++;
-            return (enumPosition < sortedSetOfPeople.Count)
-        }
-    }
-
 }
+
